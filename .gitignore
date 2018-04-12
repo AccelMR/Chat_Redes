@@ -30,3 +30,17 @@
 *.exe
 *.out
 *.app
+
+
+
+# VS15
+# ------------------------------------------------------
+/Chat_Redes/.vs/*
+# ------------------------------------------------------
+# Visual Studio Intellisense *VC.db file
+# ------------------------------------------------------
+/Chat_Redes/Chat_Redes.VC.db
+/Chat_Redes/Chat_Redes.VC.VC.opendb
+#
+Chat_Redes/.vs/Chat_Redes/v15/Browse.VC.db
+Chat_Redes/.vs/Chat_Redes/v15/Browse.VC.opendb
