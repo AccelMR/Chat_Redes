@@ -7,7 +7,7 @@
 *.ipch
 *.tlog
 /Chat_Redes/.vs/*
-/.vs/*
+.vs\*
 
 /Chat_Redes/Chat_Redes.VC.db
 /Chat_Redes/Chat_Redes.VC.VC.opendb
