@@ -6,3 +6,11 @@
 *.db
 *.ipch
 *.tlog
+/Chat_Redes/.vs/*
+/.vs/*
+
+/Chat_Redes/Chat_Redes.VC.db
+/Chat_Redes/Chat_Redes.VC.VC.opendb
+#
+Chat_Redes/.vs/Chat_Redes/v15/Browse.VC.db
+Chat_Redes/.vs/Chat_Redes/v15/Browse.VC.opendb
