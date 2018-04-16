@@ -37,6 +37,7 @@ void CChat::Menu()
 				}
 				else {
 					system("cls");
+					m_myself = new CCliente(IP, _wtoi(port.c_str()));
 					cout << "\nHas llenado los datos correctamente.\n\n";
 					break;
 				}
@@ -49,8 +50,13 @@ void CChat::Menu()
 				MessageBox(nullptr, TEXT("Archivo corrupto o inexistente\nTus mensajes no podran ser entregados"), TEXT("Message"), MB_OK);
 			}
 			else {
-				Chat();
-				zz = false;
+				if(m_myself->initilize()) {
+					Chat();
+					zz = false;
+				}
+				else {
+					std::cout << "Error al inicializar, achis achis los mariachis " << std::endl;
+				}
 			}
 		
 			break;
@@ -66,9 +72,10 @@ void CChat::Menu()
 	}
 }
 
-CChat::CChat()
+CChat::CChat():
+	chatHistory (nullptr),
+	m_myself(nullptr)
 {
-	chatHistory = nullptr;
 	elcodi = new CCodifier;
 }
 
@@ -80,6 +87,7 @@ CChat::~CChat()
 void CChat::Chat()
 {
 	std::string line;
+	std::string strRecieved = " ";
 	chatHistory = new std::list<std::string>;
 	chatHistory->clear();
 
@@ -87,7 +95,10 @@ void CChat::Chat()
 		cout << "\t\t\t\t|****************************|\n"
 			<< "\t\t\t\t|*****      CHAT        *****|\n"
 			<< "\t\t\t\t|****************************|\n\n\n";
+
+		//std::cout << strRecieved << std::endl;
 		std::getline(std::cin, line);
+
 
 		if (line == "-e") { break; }
 
@@ -110,8 +121,10 @@ void CChat::Chat()
 		}
 
 		else {
+			strRecieved = m_myself->ReceiveData(line);
 			chatHistory->push_back(line);
 			system("cls");
+
 		}
 	}
 }

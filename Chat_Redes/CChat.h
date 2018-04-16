@@ -1,5 +1,6 @@
 #pragma once
 
+#include "CCliente.h"
 #include <iostream>
 #include <string>
 #include <stdlib.h>
@@ -15,6 +16,7 @@ private:
 
 	std::list<std::string> *chatHistory ;
 	CCodifier* elcodi;
+	CCliente *m_myself;
 
 	void Chat();
 
