@@ -1,2 +1,8 @@
 
 *.opendb
+*.idb
+*.idb
+*.idb
+*.db
+*.ipch
+*.tlog
