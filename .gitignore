@@ -6,6 +6,7 @@
 *.db
 *.ipch
 *.tlog
+
 /Chat_Redes/.vs/*
 .vs\*
 .vs\Chat_Redes\v15\
@@ -15,3 +16,4 @@
 #
 Chat_Redes/.vs/v15/Browse.VC.db
 Chat_Redes/.vs/v15/Browse.VC.opendb
+*.ipch
