@@ -46,3 +46,5 @@
 Chat_Redes/.vs/Chat_Redes/v15/Browse.VC.opendb
 *.idb
 *.opendb
+*.db
+*.ipch
