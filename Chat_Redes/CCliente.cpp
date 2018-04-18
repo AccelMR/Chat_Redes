@@ -61,22 +61,45 @@ bool CCliente::initilize()
 	return true;
 }
 
-string CCliente::ReceiveData(string userInput)
+bool CCliente::SendData(string userInput)
 {
-	char buff[4096];
-	// Send the text
-	if (userInput.size() > 0) {
-		int sendResult = send(sock, userInput.c_str(), userInput.size() + 1, 0);
-		if (sendResult != SOCKET_ERROR) {
-			// Wait for response 
-			ZeroMemory(buff, 4096);
-			int bytesRecived = recv(sock, buff, 4096, 0);
-			if (bytesRecived > 0) {
-				// Echo response to console 
-				//cout << "server>" << string(buff, 0, bytesRecived) << endl;
-				return "server>" + string(buff, 0, bytesRecived);
-			}
+	int sendResult = send(sock, userInput.c_str(), userInput.size() + 1, 0);
+	if (sendResult != SOCKET_ERROR) {
+		return true;
+	}
+	else return false;
+}
+
+void CCliente::ReceiveData()
+{
+	while (true)
+	{
+		char buff[4096];
+		// Send the text	
+		ZeroMemory(buff, 4096);
+		int bytesRecived = recv(sock, buff, 4096, 0);
+		if (bytesRecived > 0) {
+			OnMessageRecieved(string(buff, 0, bytesRecived));
 		}
 	}
-	return '\0';
+}
+
+void CCliente::RunEnAlgunaPArte(RecvMsg RM)
+{
+	this->OnMessageRecieved = RM;
+	DWORD threadID_1;
+	HANDLE thread1 = CreateThread(
+		nullptr,
+		0,
+		(LPTHREAD_START_ROUTINE)MsgThread,
+		this,
+		0,
+		&threadID_1);
+}
+
+DWORD  CCliente::MsgThread(void* param)
+{
+	CCliente* nClient = (CCliente*)param;
+	nClient->ReceiveData();
+	return 0;
 }

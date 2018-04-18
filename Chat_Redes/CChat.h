@@ -10,6 +10,8 @@
 
 using std::cout;
 
+void PrintMsg(std::string msg);
+
 class CChat
 {
 private:
@@ -17,6 +19,7 @@ private:
 	std::list<std::string> *chatHistory ;
 	CCodifier* elcodi;
 	CCliente *m_myself;
+	std::string nickName;
 
 	void Chat();
 
@@ -36,6 +39,7 @@ public:
 	}
 	void Menu();
 
+
+
 	int numOfCol;
 };
-

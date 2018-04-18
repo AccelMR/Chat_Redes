@@ -7,6 +7,8 @@
 
 using namespace std;
 
+typedef void(*RecvMsg)(string);
+
 class CCliente
 {
 private:
@@ -18,6 +20,11 @@ public:
 	~CCliente();
 
 	bool initilize();
-	string ReceiveData(string userInput);
+	void ReceiveData();
+	bool SendData(string userInput);
+
+	void RunEnAlgunaPArte(RecvMsg RM);
+	static DWORD  MsgThread (void* param);
+	RecvMsg OnMessageRecieved;
 };
 

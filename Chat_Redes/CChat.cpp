@@ -30,6 +30,8 @@ void CChat::Menu()
 				std::wcin >> IP;
 				cout << "\nInsert port: ";
 				std::wcin >> port;
+				cout << "\nInserta tu nombre de usuario: ";
+				std::cin >> nickName;
 				if (!elcodi->Coder(IP, port)) {
 					system("cls");
 					cout << "\nLos datos ingresados son invalidos!!!! \n\n";
@@ -51,6 +53,7 @@ void CChat::Menu()
 			}
 			else {
 				if(m_myself->initilize()) {
+					m_myself->SendData(nickName);
 					Chat();
 					zz = false;
 				}
@@ -90,11 +93,13 @@ void CChat::Chat()
 	std::string strRecieved = " ";
 	chatHistory = new std::list<std::string>;
 	chatHistory->clear();
+	m_myself->RunEnAlgunaPArte(PrintMsg); 
 
+
+	cout << "\t\t\t\t|****************************|\n"
+		<< "\t\t\t\t|*****      CHAT        *****|\n"
+		<< "\t\t\t\t|****************************|\n\n\n";
 	while (true) {
-		cout << "\t\t\t\t|****************************|\n"
-			<< "\t\t\t\t|*****      CHAT        *****|\n"
-			<< "\t\t\t\t|****************************|\n\n\n";
 
 		//std::cout << strRecieved << std::endl;
 		std::getline(std::cin, line);
@@ -105,6 +110,10 @@ void CChat::Chat()
 		else if (line == "-c") {
 			chatHistory->clear();
 			system("cls");
+			cout << "\t\t\t\t|****************************|\n"
+				<< "\t\t\t\t|*****      CHAT        *****|\n"
+				<< "\t\t\t\t|****************************|\n\n\n";
+
 		}
 
 		else if (line == "-h") {
@@ -118,13 +127,24 @@ void CChat::Chat()
 			}
 			_getch();
 			system("cls");
+			cout << "\t\t\t\t|****************************|\n"
+				<< "\t\t\t\t|*****      CHAT        *****|\n"
+				<< "\t\t\t\t|****************************|\n\n\n";
+
 		}
 
 		else {
-			strRecieved = m_myself->ReceiveData(line);
 			chatHistory->push_back(line);
-			system("cls");
+			if (m_myself->SendData(line)) {
+				cout << char(175) << endl;
+			}
+			//system("cls");
 
 		}
 	}
+}
+
+void PrintMsg(std::string msg)
+{
+	cout << "\t\t\t" << msg << endl;
 }
